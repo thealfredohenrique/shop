@@ -14,6 +14,7 @@ interface ProductProps {
     id: string;
     name: string;
     imageUrl: string;
+    priceId: string;
     price: string;
     description: string;
   };
@@ -23,6 +24,10 @@ export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter();
 
   if (isFallback) return <p>Loading...</p>;
+
+  function handleBuyProduct() {
+    console.log(product.priceId);
+  }
 
   return (
     <ProductContainer>
@@ -36,7 +41,7 @@ export default function Product({ product }: ProductProps) {
 
         <p>{product.description}</p>
 
-        <button>Comprar agora</button>
+        <button onClick={handleBuyProduct}>Comprar agora</button>
       </ProductDetails>
     </ProductContainer>
   );
@@ -65,6 +70,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
+        priceId: price.id,
         price: new Intl.NumberFormat("pt-BR", {
           style: "currency",
           currency: "BRL",
