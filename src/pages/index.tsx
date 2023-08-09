@@ -1,11 +1,13 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { Handbag } from "@phosphor-icons/react";
 import Stripe from "stripe";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { stripe } from "../lib/stripe";
 import { HomeContainer, Product } from "../styles/pages/home";
+import { Bag } from "../styles/pages/app";
 
 interface HomeProps {
   products: {
@@ -41,7 +43,9 @@ export default function Home({ products }: HomeProps) {
 
             <footer>
               <strong>{product.name}</strong>
-              <span>{product.price}</span>
+              <Bag variant="green">
+                <Handbag size={24} weight="bold" color="#ffffff" />
+              </Bag>
             </footer>
           </Product>
         ))}

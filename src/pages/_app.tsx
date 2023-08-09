@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Container>
       <Header>
         <Image src={logo.src} width={130} height={52} alt="" />
-        <Bag>
+        <Bag variant="gray">
           <Handbag size={24} weight="bold" color="#8D8D99" />
         </Bag>
       </Header>

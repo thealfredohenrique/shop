@@ -24,8 +24,13 @@ export const Bag = styled("button", {
   gap: "0.75rem",
   height: "48px",
   width: "48px",
-  backgroundColor: "$gray800",
   border: "none",
   borderRadius: "6px",
   cursor: "pointer",
+  variants: {
+    variant: {
+      gray: { backgroundColor: "$gray800" },
+      green: { backgroundColor: "$green500" },
+    },
+  },
 });
