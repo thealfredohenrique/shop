@@ -8,15 +8,6 @@ export const Container = styled("div", {
   minHeight: "100vh",
 });
 
-export const Header = styled("header", {
-  padding: "2rem 0",
-  width: "100%",
-  maxWidth: 1180,
-  margin: "0 auto",
-  display: "flex",
-  justifyContent: "space-between",
-});
-
 export const Bag = styled("button", {
   display: "inline-flex",
   justifyContent: "center",
@@ -32,5 +23,22 @@ export const Bag = styled("button", {
       gray: { backgroundColor: "$gray800" },
       green: { backgroundColor: "$green500" },
     },
+  },
+  position: "relative",
+
+  span: {
+    position: "absolute",
+    top: "-1rem",
+    right: "-1rem",
+    height: "2rem",
+    width: "2rem",
+    backgroundColor: "$green500",
+    color: "$white",
+    border: "3px solid $gray900",
+    borderRadius: "9999px",
+    fontSize: "0.875rem",
+    fontWeight: "bold",
+    lineHeight: "160%",
+    textAlign: "center",
   },
 });
