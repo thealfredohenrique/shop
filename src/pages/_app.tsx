@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import Image from "next/image";
 import { Handbag } from "@phosphor-icons/react";
+import Cart from "../components/Cart";
 import { globalStyles } from "../styles/global";
 import { Bag, Container, Header } from "../styles/pages/app";
 import logo from "../assets/logo.svg";
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </Bag>
       </Header>
       <Component {...pageProps} />
+      <Cart />
     </Container>
   );
 }
