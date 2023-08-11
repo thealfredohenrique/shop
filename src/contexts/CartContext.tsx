@@ -5,13 +5,14 @@ interface CartItem {
   name: string;
   imageUrl: string;
   priceId: string;
-  price: string;
+  price: number;
 }
 
 interface CartContextData {
   items: CartItem[];
   isVisible: boolean;
   addItemToCart(item: CartItem): void;
+  removeItemFromCart(itemId: string): void;
   showCart(): void;
   hideCart(): void;
 }
@@ -32,6 +33,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     if (!isAlreadyInCart) setItems((state) => [...state, item]);
   }
 
+  function removeItemFromCart(itemId: string) {
+    setItems((state) => state.filter((item) => item.id !== itemId));
+  }
+
   function showCart() {
     setIsVisible(true);
   }
@@ -42,7 +47,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
   return (
     <CartContext.Provider
-      value={{ items, isVisible, addItemToCart, showCart, hideCart }}
+      value={{
+        items,
+        isVisible,
+        addItemToCart,
+        removeItemFromCart,
+        showCart,
+        hideCart,
+      }}
     >
       {children}
     </CartContext.Provider>

@@ -18,10 +18,25 @@ export const Bag = styled("button", {
   border: "none",
   borderRadius: "6px",
   cursor: "pointer",
+  transition: "background color 200ms",
   variants: {
     variant: {
-      gray: { backgroundColor: "$gray800" },
-      green: { backgroundColor: "$green500" },
+      gray: {
+        backgroundColor: "$gray800",
+        color: "#8d8d99",
+
+        "&:hover": {
+          color: "$white",
+        },
+      },
+      green: {
+        backgroundColor: "$green500",
+        color: "$white",
+
+        "&:hover": {
+          backgroundColor: "$green300",
+        },
+      },
     },
   },
   position: "relative",

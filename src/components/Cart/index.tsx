@@ -1,10 +1,14 @@
 import { useContext } from "react";
+import Image from "next/image";
 import { X } from "@phosphor-icons/react";
 import { CartContext } from "../../contexts/CartContext";
+import { priceFormatter } from "../../utils/formatters";
 import { CartContainer, CartItem } from "./styles";
 
 export default function Cart() {
-  const { isVisible, hideCart } = useContext(CartContext);
+  const { items, isVisible, removeItemFromCart, hideCart } =
+    useContext(CartContext);
+  const cartTotal = items.reduce((acc, item) => acc + item.price, 0);
 
   if (!isVisible) return <></>;
 
@@ -23,40 +27,30 @@ export default function Cart() {
       <h1>Sacola de compras</h1>
 
       <ul>
-        <CartItem>
-          <img src="" alt="" />
-          <div>
-            <h2>Camiseta Beyond the Limits</h2>
-            <strong>R$ 79,90</strong>
-            <button>Remover</button>
-          </div>
-        </CartItem>
-        <CartItem>
-          <img src="" alt="" />
-          <div>
-            <h2>Camiseta Beyond the Limits</h2>
-            <strong>R$ 79,90</strong>
-            <button>Remover</button>
-          </div>
-        </CartItem>
-        <CartItem>
-          <img src="" alt="" />
-          <div>
-            <h2>Camiseta Beyond the Limits</h2>
-            <strong>R$ 79,90</strong>
-            <button>Remover</button>
-          </div>
-        </CartItem>
+        {items.map((item) => (
+          <CartItem key={item.id}>
+            <Image src={item.imageUrl} alt="" height={76} width={76} />
+            <div>
+              <h2>{item.name}</h2>
+              <strong>{priceFormatter.format(item.price)}</strong>
+              <button onClick={() => removeItemFromCart(item.id)}>
+                Remover
+              </button>
+            </div>
+          </CartItem>
+        ))}
       </ul>
 
       <footer>
         <div>
           <span>Quantidade</span>
-          <span>3 itens</span>
+          <span>
+            {items.length} {items.length === 1 ? "item" : "itens"}
+          </span>
         </div>
         <div>
           <strong>Valor total</strong>
-          <strong>R$ 270,00</strong>
+          <strong>{priceFormatter.format(cartTotal)}</strong>
         </div>
         <button>Finalizar compra</button>
       </footer>

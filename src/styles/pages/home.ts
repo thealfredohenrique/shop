@@ -43,6 +43,8 @@ export const Product = styled(Link, {
     },
 
     span: {
+      display: "block",
+      marginTop: "0.5rem",
       fontSize: "$xl",
       fontWeight: "bold",
       color: "$green300",
