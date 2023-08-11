@@ -1,11 +1,21 @@
+import { useContext } from "react";
 import { X } from "@phosphor-icons/react";
+import { CartContext } from "../../contexts/CartContext";
 import { CartContainer, CartItem } from "./styles";
 
 export default function Cart() {
+  const { isVisible, hideCart } = useContext(CartContext);
+
+  if (!isVisible) return <></>;
+
+  function handleHideCart() {
+    hideCart();
+  }
+
   return (
     <CartContainer>
       <header>
-        <button>
+        <button onClick={handleHideCart}>
           <X size={24} weight="bold" />
         </button>
       </header>

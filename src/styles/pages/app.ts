@@ -1,4 +1,4 @@
-import { styled } from "..";
+import { styled } from "@stitches/react";
 
 export const Container = styled("div", {
   display: "flex",
@@ -32,13 +32,15 @@ export const Bag = styled("button", {
     right: "-1rem",
     height: "2rem",
     width: "2rem",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "$green500",
     color: "$white",
     border: "3px solid $gray900",
     borderRadius: "9999px",
     fontSize: "0.875rem",
     fontWeight: "bold",
-    lineHeight: "160%",
     textAlign: "center",
   },
 });

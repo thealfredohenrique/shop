@@ -4,7 +4,6 @@ export const CartContainer = styled("div", {
   position: "absolute",
   right: "0",
   top: "0",
-  bottom: "0",
   height: "100%",
   width: "30rem",
   display: "flex",

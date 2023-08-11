@@ -1,4 +1,4 @@
-import { styled } from "..";
+import { styled } from "@stitches/react";
 
 export const ProductContainer = styled("main", {
   display: "grid",

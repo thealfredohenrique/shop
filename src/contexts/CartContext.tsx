@@ -10,7 +10,10 @@ interface CartItem {
 
 interface CartContextData {
   items: CartItem[];
+  isVisible: boolean;
   addItemToCart(item: CartItem): void;
+  showCart(): void;
+  hideCart(): void;
 }
 
 interface CartContextProviderProps {
@@ -21,6 +24,7 @@ export const CartContext = createContext({} as CartContextData);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
 
   function addItemToCart(item: CartItem) {
     const isAlreadyInCart = items.some((e) => e.id === item.id);
@@ -28,8 +32,18 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     if (!isAlreadyInCart) setItems((state) => [...state, item]);
   }
 
+  function showCart() {
+    setIsVisible(true);
+  }
+
+  function hideCart() {
+    setIsVisible(false);
+  }
+
   return (
-    <CartContext.Provider value={{ items, addItemToCart }}>
+    <CartContext.Provider
+      value={{ items, isVisible, addItemToCart, showCart, hideCart }}
+    >
       {children}
     </CartContext.Provider>
   );
