@@ -38,6 +38,8 @@ export const CartContainer = styled("div", {
     flexDirection: "column",
     rowGap: "1.5rem",
     listStyle: "none",
+    overflowY: "auto",
+    marginBottom: "2rem",
   },
 
   footer: {

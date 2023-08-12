@@ -24,27 +24,8 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  // const [isCreatingCheckout, setIsCreatingCheckout] = useState(false);
-  // const { isFallback } = useRouter();
   const { items, addItemToCart } = useContext(CartContext);
   const isAlreadyInCart = items.some((e) => e.id === product.id);
-
-  // if (isFallback) return <p>Loading...</p>;
-
-  /* async function handleBuyProduct() {
-    try {
-      setIsCreatingCheckout(true);
-      const response = await axios.post("/api/checkout", {
-        priceId: product.priceId,
-      });
-      const { checkoutUrl } = response.data;
-
-      window.location.href = checkoutUrl;
-    } catch (e) {
-      setIsCreatingCheckout(false);
-      alert("Falha ao redirecionar ao checkout.");
-    }
-  } */
 
   function handleAddProductToCart() {
     addItemToCart(product);

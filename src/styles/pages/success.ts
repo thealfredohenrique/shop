@@ -36,19 +36,29 @@ export const SuccessContainer = styled("main", {
   },
 });
 
+export const ImagesContainer = styled("div", {
+  display: "flex",
+  marginLeft: "2rem",
+});
+
 export const ImageContainer = styled("div", {
   width: "100%",
-  maxWidth: 130,
-  height: 145,
+  maxWidth: 128,
+  height: 128,
   background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
-  borderRadius: 8,
+  borderRadius: 9999,
   padding: "0.25rem",
   marginTop: "4rem",
-  display: "flex",
+  display: "inline-flex",
   justifyContent: "center",
   alignItems: "center",
+  boxShadow: "0px 0px 60px 0px rgba(0, 0, 0, 0.80)",
 
   img: {
     objectFit: "cover",
+  },
+
+  "+ div": {
+    transform: "translateX(-2rem)",
   },
 });

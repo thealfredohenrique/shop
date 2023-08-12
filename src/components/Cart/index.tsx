@@ -1,11 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
+import axios from "axios";
 import { X } from "@phosphor-icons/react";
 import { CartContext } from "../../contexts/CartContext";
 import { priceFormatter } from "../../utils/formatters";
 import { CartContainer, CartItem } from "./styles";
 
 export default function Cart() {
+  const [isCreatingCheckout, setIsCreatingCheckout] = useState(false);
+  const { isFallback } = useRouter();
   const { items, isVisible, removeItemFromCart, hideCart } =
     useContext(CartContext);
   const cartTotal = items.reduce((acc, item) => acc + item.price, 0);
@@ -14,6 +18,21 @@ export default function Cart() {
 
   function handleHideCart() {
     hideCart();
+  }
+
+  async function handleCheckout() {
+    try {
+      setIsCreatingCheckout(true);
+      const response = await axios.post("/api/checkout", {
+        items: items.map(({ priceId }) => ({ priceId })),
+      });
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (e) {
+      setIsCreatingCheckout(false);
+      alert("Falha ao redirecionar ao checkout.");
+    }
   }
 
   return (
@@ -33,7 +52,10 @@ export default function Cart() {
             <div>
               <h2>{item.name}</h2>
               <strong>{priceFormatter.format(item.price)}</strong>
-              <button onClick={() => removeItemFromCart(item.id)}>
+              <button
+                disabled={isCreatingCheckout}
+                onClick={() => removeItemFromCart(item.id)}
+              >
                 Remover
               </button>
             </div>
@@ -52,7 +74,9 @@ export default function Cart() {
           <strong>Valor total</strong>
           <strong>{priceFormatter.format(cartTotal)}</strong>
         </div>
-        <button>Finalizar compra</button>
+        <button disabled={isCreatingCheckout} onClick={handleCheckout}>
+          {isFallback ? "Finalizando compra..." : "Finalizar compra"}
+        </button>
       </footer>
     </CartContainer>
   );
